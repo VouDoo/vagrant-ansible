@@ -1,6 +1,6 @@
-# Vagrant - Ansible controller and node
+# Vagrant - Ansible
 
-An easy way to get operational Ansible controller and node in no time ;)
+An easy way to get operational Ansible playground in no time ;)
 
 If needed, a Jenkins service is up to run the Ansible playbooks.
 
