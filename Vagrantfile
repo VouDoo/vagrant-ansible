@@ -6,7 +6,8 @@
 #
 # DESCRIPTION
 # ~~~~~~~~~~~
-# Deploy a Ansible/Jenkins master and a bench of slave machines (client hosts)
+# Deploy a Ansible controller and a bench of node machines (client hosts)
+# Jenkins can be used to run the Ansible playbooks
 #
 # NOTES
 # ~~~~~
@@ -18,8 +19,8 @@
 # Use the following command to spin up the boxes:
 #   vagrant up
 #
-# PARAMTERS
-# ~~~~~~~~~
+# PARAMETERS
+# ~~~~~~~~~~
 # Define network for the virtual machines' private network
 # Use only CIDR length /24 for the prefix IPv4
 prefix_ip = "192.168.26"
@@ -38,6 +39,7 @@ slave_instances_cpus = 1
 slave_instances_memory = 512
 # Define number of slave instances (client machines)
 slave_instances_count = 2
+
 
 # Initialize instances
 instances = []
