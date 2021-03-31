@@ -1,5 +1,5 @@
-# Vagrantfile: Ansible/Jenkins master and slaves insides CentOS 7 boxes
+# Vagrant - Ansible/Jenkins controller and node
 
-An easy way to get an operationnal Ansible/Jenkins master (with slave machines) in no time ;)
+An easy way to get operational Ansible/Jenkins controller and node in no time ;)
 
-Please note, this Vagrantfile uses VirtualBox as provider.
+Please note, this Vagrant project uses VirtualBox as provider.
