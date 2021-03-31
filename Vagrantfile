@@ -66,7 +66,7 @@ end
 
 Vagrant.configure("2") do |config|
   # Get vagrant user's public key from file
-  vagrant_user_pub_key = File.read("./ssh-keys/id_rsa.pub")
+  vagrant_user_pub_key = File.read("ssh-keys/id_rsa.pub")
   # Provision instances
   instances.each do |instance|
     config.vm.define instance[:name] do |i|
@@ -85,11 +85,11 @@ Vagrant.configure("2") do |config|
       end
       if instance[:type] == "m" # for master node
         # Import pair of SSH keys for vagrant user
-        i.vm.provision "file", source: "./ssh-keys/id_rsa", destination: "/home/vagrant/.ssh/id_rsa"
-        i.vm.provision "file", source: "./ssh-keys/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
+        i.vm.provision "file", source: "ssh-keys/id_rsa", destination: "/home/vagrant/.ssh/id_rsa"
+        i.vm.provision "file", source: "ssh-keys/id_rsa.pub", destination: "/home/vagrant/.ssh/id_rsa.pub"
         i.vm.provision "shell", inline: "chmod 600 /home/vagrant/.ssh/id_rsa && chmod 644 /home/vagrant/.ssh/id_rsa.pub"
         # Install Ansible
-        i.vm.provision "shell", path: "./installAnsible.sh"
+        i.vm.provision "shell", path: "scripts/installAnsible.sh"
         # Add slave hostnames in Ansible hosts file
         i.vm.provision "shell", inline: "echo -e '\n# Sandbox hosts\n[sandbox]' >> /etc/ansible/hosts"
         instances.each do |instance|
@@ -98,11 +98,11 @@ Vagrant.configure("2") do |config|
           end
         end
         # Install WGet
-        i.vm.provision "shell", path: "./InstallWGet.sh"
+        i.vm.provision "shell", path: "scripts/InstallWGet.sh"
         # Install Jenkins (including Ansible plugin)
-        i.vm.provision "shell", path: "./installJenkinsWithAnsiblePlugin.sh"
+        i.vm.provision "shell", path: "scripts/installJenkinsWithAnsiblePlugin.sh"
         # Add firewall service for Jenkins
-        i.vm.provision "shell", path: "./addJenkinsFirewallService.sh"
+        i.vm.provision "shell", path: "scripts/addJenkinsFirewallService.sh"
         # Forward port 8080 for Jenkins web interface
         i.vm.network :forwarded_port, guest: 8080, host: 18080
       elsif instance[:type] == "s" # for slave node
